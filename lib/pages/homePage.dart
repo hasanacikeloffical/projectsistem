@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectsistem/pages/settingsPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,9 +21,9 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Search Screen', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 24))),
+    Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
+    Center(child: Text('profile Page', style: TextStyle(fontSize: 24))),
+    Center(child: Text('Setting Page', style: TextStyle(fontSize: 24))),
   ];
 
   void _onTabTapped(int index) {
@@ -35,22 +36,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        title: Center(
+          child: Text('Günlük Program', style: TextStyle(color: Colors.white)),
+        ),
+        backgroundColor: Colors.purple,
       ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(child: _pages[_currentIndex]),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SelectionPage()),
-              );
-            },
-            child: Text("Ekle"),
-          ),
+          if (_currentIndex == 0)
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SelectionPage()),
+                );
+              },
+              child: Text("Ekle", style: TextStyle(color: Colors.purple)),
+            ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

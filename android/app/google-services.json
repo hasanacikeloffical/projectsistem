@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569463280770",
+    "project_id": "projectsistem-650aa",
+    "storage_bucket": "projectsistem-650aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569463280770:android:ccfe729fe4818320f6509b",
+        "android_client_info": {
+          "package_name": "com.example.projectsistem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_KC_-q0-UnaW0TN_oOodzhe0XsWTAQ9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

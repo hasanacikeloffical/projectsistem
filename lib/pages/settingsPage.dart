@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectsistem/pages/homePage.dart';
+import 'package:projectsistem/loginPage.dart';
 
 
 class SettingPage extends StatefulWidget {

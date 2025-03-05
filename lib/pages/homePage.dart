@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectsistem/pages/settingsPage.dart';
+import 'package:projectsistem/pages/profilePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,8 +23,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('profile Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Setting Page', style: TextStyle(fontSize: 24))),
+    ProfilePage(), // Profil sayfası
+    SettingPage(), // Ayarlar sayfası
   ];
 
   void _onTabTapped(int index) {
@@ -64,9 +65,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+          BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Settings',
           ),
         ],
       ),
@@ -107,7 +106,8 @@ class _SelectionPageState extends State<SelectionPage> {
     if (picked != null && picked != selectedTime) {
       setState(() {
         selectedTime = picked;
-      });
+    }
+    );
     }
   }
 
@@ -195,7 +195,8 @@ class ConfirmationPage extends StatefulWidget {
     required this.date,
     required this.time,
     required this.bodyPart,
-  });
+  }
+  );
 
   @override
   _ConfirmationPageState createState() => _ConfirmationPageState();

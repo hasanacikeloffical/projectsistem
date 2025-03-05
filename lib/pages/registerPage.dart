@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
-  _RegisteScreenState createState() => _RegisteScreenState();
+  _registerPage createState() => _registerPage();
 }
 
-class _RegisteScreenState extends State<RegisterPage> {
+class _registerPage extends State<RegisterPage> {
   final FirebaseAuth _authModel = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -29,25 +29,79 @@ class _RegisteScreenState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    double height =
+        MediaQuery.of(context).size.height; // height değişkenini tanımla
     return Scaffold(
-      appBar: AppBar(title: Text("Register")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(onPressed: _register, child: Text('Register')),
-          ],
+      backgroundColor: Colors.deepPurple.shade200,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                height: height * .25,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    opacity: 0.8,
+                    image: AssetImage("assets/image/design.png"),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextField(
+                      controller: _emailController,
+                      decoration: InputDecoration(labelText: 'Email',
+                        labelStyle: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    TextField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.white),
+                      ),
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 30),
+                    ElevatedButton(
+                      onPressed: _register,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple.shade300,
+                      ),
+                      child: Text(
+                        'Register',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(height: 340),
+                    Align(
+                      alignment: Alignment.bottomLeft, // Sol alt tarafa sabitle
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Geri gitme işlevi
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.deepPurple.shade300,
+                          
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Geri Git',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

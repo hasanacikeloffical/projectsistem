@@ -74,7 +74,7 @@ class _registerPage extends State<RegisterPage> {
                         backgroundColor: Colors.deepPurple.shade300,
                       ),
                       child: Text(
-                        'Register',
+                        'Üye Ol',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

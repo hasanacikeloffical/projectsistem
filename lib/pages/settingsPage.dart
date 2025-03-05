@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projectsistem/loginPage.dart';
-
+import 'package:projectsistem/core/ThemeManager.dart';
+import 'package:projectsistem/core/localemanager.dart';
+import 'package:provider/provider.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -14,7 +15,11 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ayarlar')),
+      backgroundColor: Colors.purple.shade100,
+      appBar: AppBar(
+        backgroundColor: Colors.purple.shade100,
+        title: Text('Ayarlar'),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -42,9 +47,58 @@ class _SettingPageState extends State<SettingPage> {
                 });
               },
             ),
+            SizedBox(height: 20),
+            SettingsWidget(), // Yeni bileşeni ekledik
           ],
         ),
       ),
+    );
+  }
+}
+
+// **Ayrı bir ayar bileşeni olarak SettingsWidget**
+class SettingsWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeManager = Provider.of<ThemeManager>(context);
+    final localManager = Provider.of<LocalManager>(context);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(localManager.translate('dark_theme')),
+            Switch(
+              value: themeManager.themeMode == ThemeMode.dark,
+              onChanged: (value) {
+                themeManager.toggleTheme();
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(localManager.translate('language')),
+            const SizedBox(width: 10),
+            DropdownButton<Locale>(
+              value: localManager.currentLocale,
+              onChanged: (Locale? newLocale) {
+                if (newLocale != null) {
+                  localManager.changedLocale(newLocale);
+                }
+              },
+              items: const [
+                DropdownMenuItem(value: Locale('en'), child: Text('English')),
+                DropdownMenuItem(value: Locale('tr'), child: Text('Türkçe')),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

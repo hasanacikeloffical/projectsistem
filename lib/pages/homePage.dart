@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
+    
   final List<Widget> _pages = [
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
     ProfilePage(), // Profil sayfası
@@ -36,13 +37,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('Günlük Program', style: TextStyle(color: Colors.white)),
-        ),
-        backgroundColor: Colors.purple,
-      ),
-
+      backgroundColor: Colors.purple.shade100,
+      
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -55,18 +51,24 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => SelectionPage()),
                 );
               },
-              child: Text("Ekle", style: TextStyle(color: Colors.purple)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple.shade300,
+              ),
+              child: Center(
+                child: Text("Ekle", style: TextStyle(color: Colors.white)),
+              ),
             ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.purple.shade100,
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        items: [
+        iconSize: 30,
+         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Settings',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Settings',),
         ],
       ),
     );
@@ -106,8 +108,7 @@ class _SelectionPageState extends State<SelectionPage> {
     if (picked != null && picked != selectedTime) {
       setState(() {
         selectedTime = picked;
-    }
-    );
+      });
     }
   }
 
@@ -195,8 +196,7 @@ class ConfirmationPage extends StatefulWidget {
     required this.date,
     required this.time,
     required this.bodyPart,
-  }
-  );
+  });
 
   @override
   _ConfirmationPageState createState() => _ConfirmationPageState();

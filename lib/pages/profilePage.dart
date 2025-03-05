@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projectsistem/loginPage.dart';
+import 'package:projectsistem/pages/homePage.dart';
 
 class ProfilePage extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -26,36 +27,38 @@ class ProfilePage extends StatelessWidget {
         );
       });
       return Scaffold(
+        backgroundColor: Colors.purple.shade100,
         body: Center(child: CircularProgressIndicator()), // Yüklenme animasyonu
       );
     }
 
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Profil"))),
+      backgroundColor: Colors.purple.shade100,
+      appBar: AppBar(
+        backgroundColor: Colors.purple.shade100,
+        title: Center(child: Text("Profil",
+        style: TextStyle(color: Colors.white),)),
+      ),
+
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage:
-                  user.photoURL != null ? NetworkImage(user.photoURL!) : null,
-              child:
-                  user.photoURL == null ? Icon(Icons.person, size: 50) : null,
-            ),
-            SizedBox(height: 20),
-
+            SizedBox(height:20),
+            
+           
             // Text(
             //   user.displayName ?? "İsimsiz Kullanıcı",
             //   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             // ),
             // SizedBox(height: 10),
-
-            Text(
-              user.email ?? "E-posta bulunamadı",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+            Center(
+              child: Text(
+                user.email ?? "E-posta bulunamadı",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
             SizedBox(height: 10),
 
@@ -64,11 +67,33 @@ class ProfilePage extends StatelessWidget {
             //   style: TextStyle(fontSize: 16, color: Colors.blueGrey),
             // ),
             // SizedBox(height: 30),
-
             ElevatedButton.icon(
               onPressed: () => _logout(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple.shade100,
+              ),
               icon: Icon(Icons.logout),
-              label: Text("Çıkış Yap"),
+              label: Text("Çıkış Yap", style: TextStyle(color: Colors.white)),
+            ),
+            SizedBox(height: 500,),
+             Align(
+              alignment: Alignment.bottomLeft, // Sol alt tarafa sabitle
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => HomePage()),
+                  ); // Geri gitme işlevi
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.deepPurple.shade300,
+                ),
+                child: Center(
+                  child: Text(
+                    'Geri Git',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

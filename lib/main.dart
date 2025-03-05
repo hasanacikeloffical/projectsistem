@@ -1,21 +1,50 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:projectsistem/pages/homePage.dart'; // Ana sayfa (Bottom Nav Bar olan yer)
-import 'package:projectsistem/loginPage.dart'; // Giriş sayfası
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:projectsistem/pages/settingsPage.dart';
+import 'package:provider/provider.dart';
+import 'package:projectsistem/core/ThemeManager.dart';
+import 'package:projectsistem/core/localemanager.dart';
+import 'package:projectsistem/pages/homePage.dart';
+import 'package:projectsistem/loginPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Firebase'i başlat
-  runApp(MyApp());
+  await Firebase.initializeApp(); // Firebase başlatma
+  runApp(ManagerScreen());
 }
 
-class MyApp extends StatelessWidget {
+class ManagerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Uygulama açıldığında kontrol sayfası
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeManager()),
+        ChangeNotifierProvider(create: (_) => LocalManager()),
+      ],
+      child: Consumer2<ThemeManager, LocalManager>(
+        builder: (context, themeManager, localManager, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Firebase Demo',
+            theme: ThemeData.light(),
+            darkTheme: ThemeData.dark(),
+            themeMode: themeManager.themeMode,
+            locale: localManager.currentLocale,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // İngilizce
+              Locale('tr'), // Türkçe
+            ],
+            home: SplashScreen(),
+          );
+        },
+      ),
     );
   }
 }
@@ -23,29 +52,20 @@ class MyApp extends StatelessWidget {
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _checkUserLogin(),
-      builder: (context, AsyncSnapshot<User?> snapshot) {
+    return StreamBuilder<User?>(
+      stream:
+          FirebaseAuth.instance.authStateChanges(), // Kullanıcı durumunu dinle
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ), // Yükleniyor ekranı
-          );
+            body: Center(child: CircularProgressIndicator()),
+          ); // Yükleniyor ekranı
+        } else if (snapshot.hasData && snapshot.data != null) {
+          return HomePage(); // Kullanıcı giriş yapmışsa HomePage
         } else {
-          if (snapshot.data != null) {
-            return HomePage(); // Kullanıcı giriş yapmışsa HomePage
-          } else {
-            return LoginPage(); // Giriş yapmamışsa LoginPage
-          }
+          return LoginPage(); // Kullanıcı çıkış yapmışsa LoginPage
         }
       },
     );
-  }
-
-  Future<User?> _checkUserLogin() async {
-    return FirebaseAuth
-        .instance
-        .currentUser; // Firebase'de giriş yapmış kullanıcıyı al
   }
 }

@@ -37,6 +37,9 @@ dependencies:
   firebase_core: ^3.12.1
   firebase_auth: ^5.5.1
   cloud_firestore: ^5.6.5
+  shared_preferences: ^2.5.2
+  provider: ^6.1.2
+  flutter_localization: ^0.3.1
 
 dev_dependencies:
   flutter_test:
@@ -54,13 +57,16 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  assets:
-    - assets/image/design.png
+uses-material-design: false
+assets:
+  - assets/image/design.png
+  - assets/lang/en.json
+
+  - assets/lang/tr.json
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
- 
-
+   
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

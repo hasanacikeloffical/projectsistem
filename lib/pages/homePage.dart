@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
-    
   final List<Widget> _pages = [
     Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
     ProfilePage(), // Profil sayfası
@@ -37,8 +36,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade100,
-      
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -51,9 +48,7 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => SelectionPage()),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple.shade300,
-              ),
+              style: ElevatedButton.styleFrom(),
               child: Center(
                 child: Text("Ekle", style: TextStyle(color: Colors.white)),
               ),
@@ -61,14 +56,16 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple.shade100,
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
         iconSize: 30,
-         items: [
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'Settings',),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
       ),
     );

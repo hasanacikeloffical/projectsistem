@@ -1,7 +1,7 @@
 import 'package:projectsistem/model/authentication_model.dart';
-import 'package:projectsistem/pages/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:projectsistem/pages/homePage.dart';
+import 'package:projectsistem/registerPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -88,47 +88,38 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: _login,
                       style: ElevatedButton.styleFrom(
-                         backgroundColor:Colors.deepPurple.shade300,
+                        backgroundColor: Colors.deepPurple.shade300,
                       ),
                       child: Center(
-                        child: Text("Giriş Yap",
-                        style: TextStyle(color: Colors.white),),
-                      ),
-                      ),
-                      
-              
-                  ],
-          
-                       ),
-
-                      ),
-                    
-                      SizedBox(height: 15,),
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RegisterPage(),
-                            ),
-                          );
-                        },
-                        child: Text("Henüz hesabıız yok mu ? Hemen üye ol!",
-                        style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          "Giriş Yap",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
-                
                 ),
-              
               ),
-            
-            
+
+              SizedBox(height: 15),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                    );
+                  },
+                  child: Text(
+                    "Henüz hesabıız yok mu ? Hemen üye ol!",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
           ),
-          
-        );
-      
-    
+        ),
+      ),
+    );
   }
 }

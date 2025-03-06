@@ -15,11 +15,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.purple.shade100,
-        title: Text('Ayarlar'),
-      ),
+      appBar: AppBar(title: Text('Ayarlar')),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(

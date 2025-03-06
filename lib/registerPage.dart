@@ -32,7 +32,7 @@ class _registerPage extends State<RegisterPage> {
     double height =
         MediaQuery.of(context).size.height; // height değişkenini tanımla
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade200,
+     
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -71,7 +71,7 @@ class _registerPage extends State<RegisterPage> {
                     ElevatedButton(
                       onPressed: _register,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple.shade300,
+                       
                       ),
                       child: Text(
                         'Üye Ol',
@@ -86,13 +86,13 @@ class _registerPage extends State<RegisterPage> {
                           Navigator.pop(context); // Geri gitme işlevi
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.deepPurple.shade300,
+                          
                           
                         ),
                         child: Center(
                           child: Text(
                             'Geri Git',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.purple),
                           ),
                         ),
                       ),
